@@ -6,19 +6,36 @@ import { Card, CardContainer, Head, Select, SelectContainer } from './styledMain
 import './mainStyles.css';
 import '../../App.css';
 
-import { deleteEvent } from '../../Actions';
+import { deleteEvent, editEvent } from '../../Actions';
 
+import EditForm from './EditForm';
 
 
 class Main extends React.Component {
     state = {
         deletingEvent: null,
+        editingEventId: null
     };
+
+    // componentDidMount() {
+    //     this.props.getData();
+    // }
 
     deleteEvent = id => {
         this.setState({ deletingEventId: id })
         this.props.deleteEvent(id);
     };
+
+    editEvent = (e, event) => {
+        e.preventDefault();
+        this.props.editEvent(event).then(() => {
+            this.setState({ editingEventId: null });
+        });
+    };
+
+    closeEdit = () =>{
+        this.setState({ editingEventId:''})
+    }
 
 
 
@@ -46,20 +63,39 @@ class Main extends React.Component {
                     </Select>
                 </SelectContainer>
                 <CardContainer>
-                    {this.props.events.map(event => (
-                        <Card>
-                            <h4>{event.event}</h4>
-                            <p>{event.date}</p>
-                            <p>{event.description}</p>
-                            <p>{event.messageDate}</p>
-                            <p>{event.message}</p>
-                            <i class="fas fa-pencil-alt" />
-                            <i
-                                class="fas fa-times"
-                                onClick={() => this.deleteEvent(event.id)}
-                            />
-                        </Card>
-                    ))}
+                    {this.props.events.map(event => {
+                        if (this.state.editingEventId === event.id) {
+                            return (
+                                <Card>
+                                    <EditForm
+                                        event={event}
+                                        editEvent={this.editEvent}
+                                        editingEvent={this.props.editingEvent}
+                                        closeEdit = {this.closeEdit}
+                                    />
+                                </Card>
+                            );
+                        }
+                        console.log(this.state.editingEventId)
+                        return (
+                            <Card>
+                                <h4>{event.event}</h4>
+                                <p>{event.date}</p>
+                                <p>{event.description}</p>
+                                <p>{event.messageDate}</p>
+                                <p>{event.message}</p>
+                                <i 
+                                    className="fas fa-pencil-alt" 
+                                    onClick = {() =>this.setState({ editingEventId: event.id})}
+                                    
+                                />
+                                <i
+                                    className="fas fa-times"
+                                    onClick={() => this.deleteEvent(event.id)}
+                                />
+                            </Card>
+                        )
+                    })}
 
                 </CardContainer>
 
@@ -70,10 +106,12 @@ class Main extends React.Component {
 
 const mapStateToProps = ({
     events,
-    deletingEvent
+    deletingEvent,
+    editingEvent
 }) => ({
     events,
-    deleteEvent
+    deleteEvent,
+    editingEvent
 });
 
 // const mapStateToProps = state => {
@@ -85,5 +123,5 @@ const mapStateToProps = ({
 
 export default connect(
     mapStateToProps,
-    { deleteEvent }
+    { deleteEvent, editEvent}
 )(Main);

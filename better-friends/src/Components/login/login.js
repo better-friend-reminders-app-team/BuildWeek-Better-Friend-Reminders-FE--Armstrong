@@ -19,11 +19,10 @@ class Login extends React.Component {
 
     submit = (e) => {
         e.preventDefault();
-        alert('you submitted')
-        if (localStorage.getItem('username') === null && localStorage.getItem('password') === null) {
-            localStorage.setItem('username', this.state.un)
-            localStorage.setItem('password', this.state.pw)
-            this.props.login(this.state)
+        if (localStorage.getItem('username') === this.state.un && localStorage.getItem('password') === this.state.pw) {
+           localStorage.setItem("token", this.props.token)
+            alert('you are signed in')
+            this.props.login()
         }
 
         this.setState({
@@ -43,5 +42,10 @@ class Login extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.token
+    }
+}
 
-export default connect(null, {login})(Login);
+export default connect(mapStateToProps, {login})(Login);

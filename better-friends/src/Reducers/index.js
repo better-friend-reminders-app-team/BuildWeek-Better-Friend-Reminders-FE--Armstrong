@@ -1,15 +1,15 @@
 import {
     ADD_START,
-    ADD_SUCCESS,
+    ADD_SUCCESS,// eslint-disable-next-line
     ADD_FAIL,
     GET_DATA_START,
-    GET_DATA_SUCCESS,
+    GET_DATA_SUCCESS,// eslint-disable-next-line
     GET_DATA_FAIL,
     LOGIN_START,
-    LOGIN_SUCCESS,
+    LOGIN_SUCCESS,// eslint-disable-next-line
     LOGIN_FAIL,
     REGISTER_START,
-    REGISTER_SUCCESS,
+    REGISTER_SUCCESS,// eslint-disable-next-line
     REGISTER_FAIL
 } from '../Actions';
 
@@ -22,19 +22,22 @@ const initialState = {
             date: '01/20/94',
             description: 'Birthday party',
             messageDate: '01/19/19',
-            message: 'Happy Birthday'
+            message: 'Happy Birthday',
+            id: 1
         },
         {
             event: 'testevent2',
             date: 'testdate2',
             description: 'testdesc2',
             messageDate: 'testmsgdate2',
-            message: 'testmsg2'
+            message: 'testmsg2',
+            id: 2
         }
     ],
     error: '',
     loggingIn: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    token: '39f7gb5sug63983nf84bf73odnggt739d'
 };
 
 const reducer = (state = initialState, action) => {
@@ -83,7 +86,10 @@ const reducer = (state = initialState, action) => {
         case REGISTER_START:
             return ({});
         case REGISTER_SUCCESS:
-            return ({});
+            return ({
+                ...state,
+                isLoggedIn: true
+            });
 
         default:
             return state;

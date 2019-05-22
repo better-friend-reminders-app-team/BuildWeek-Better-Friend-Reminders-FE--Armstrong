@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-
+// eslint-disable-next-line
 const fadeColor = '#fafafa';
-const loginColor = '#3f3d56';
-const buttonColor = '#f4735c';
+const loginColor = '#3f3d56';// eslint-disable-next-line
+const buttonColor = '#f4735c';// eslint-disable-next-line
 const backgroundColor = '#181a1b';
 
 
@@ -51,6 +51,56 @@ export const Select = styled.select`
     border:1px solid black;
     margin-left:10px;
     padding: 5px 0;
+`;
+
+export const EditCard = styled.div`
+
+`;
+
+export const EditCloseBtn = styled.div`
+    position: absolute;
+    right:5px;
+    top:5px;
+`;
+
+export const EditHead = styled.div`
+    text-align: center;
+`;
+
+export const EditTitle = styled.h4`
+    margin: 10px 0;
+`;
+
+export const EditFormStyle = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const EditInput = styled.input`
+    margin: 5px 0;
+    border: 1px solid grey;
+    background: #4f4c6c;
+    border-radius: 3px
+`;
+
+export const EditArea = styled.textarea`
+    margin: 5px 0;
+    border: 1px solid grey;
+    background: #4f4c6c;
+    border-radius: 3px;
+    color: white;
+`;
+
+export const EditBtn = styled.button`
+    background: white;
+    border:1px solid grey;
+    width: 10%;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    cursor:pointer;
+    color: white;
+
 `;
 
 export const Card = styled.div`

@@ -21,12 +21,12 @@ class Register extends React.Component {
 
     submit = (e) => {
         e.preventDefault();
-        alert('you submitted')
         localStorage.setItem('username', this.state.un)
         localStorage.setItem('password', this.state.pw)
         localStorage.setItem('firstname', this.state.fn)
         localStorage.setItem('phonenumber', this.state.pn)
-        this.props.register(this.state);
+        this.props.register();
+        alert('you have registered')
         this.setState({
             un: '',
             pw: '',
@@ -39,7 +39,7 @@ class Register extends React.Component {
         return (
             <Form onSubmit={this.submit}>
                 <Input name="fn" onChange={this.handleChanges} value={this.state.fn} placeholder="First Name" />
-                <Input name="pn" onChange={this.handleChanges} value={this.state.fn} placeholder="Phone Number" />
+                <Input name="pn" onChange={this.handleChanges} value={this.state.pn} placeholder="Phone Number" />
                 <Input name="un" onChange={this.handleChanges} value={this.state.un} placeholder="username" />
                 <Input name="pw" onChange={this.handleChanges} value={this.state.pw} placeholder="password" />
                 <Button>Register</Button>
@@ -48,5 +48,10 @@ class Register extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.token
+    }
+}
 
-export default connect(null, {register})(Register);
+export default connect(mapStateToProps, {register})(Register);
