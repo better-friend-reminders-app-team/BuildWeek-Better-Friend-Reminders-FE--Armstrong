@@ -19,12 +19,11 @@ class Login extends React.Component {
 
     submit = (e) => {
         e.preventDefault();
+        alert('you submitted')
         if (localStorage.getItem('username') === null && localStorage.getItem('password') === null) {
             localStorage.setItem('username', this.state.un)
             localStorage.setItem('password', this.state.pw)
             this.props.login(this.state)
-            console.log('bight')
-
         }
 
         this.setState({

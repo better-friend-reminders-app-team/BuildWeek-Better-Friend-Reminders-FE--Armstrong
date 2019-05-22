@@ -35,13 +35,29 @@ export const addEvent = event => dispatch => {
         });
 }
 
+export const DELETE_START = 'DELETE_START';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+export const DELETE_FAIL = 'DELETE_FAIL';
+
+export const deleteEvent = id => dispatch =>{
+    dispatch({ type: DELETE_START});
+    axios
+        .delete('`***LINK***/${id}`')
+        .then(res =>{
+            dispatch({ type: DELETE_SUCCESS, payload: res.data });
+        })
+        .catch(err=>{
+            console.log(err.response)
+            dispatch({ type: DELETE_FAIL, payload: err.response})
+        })
+}  
+
 
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 
 export const login = creds => dispatch => {
-    console.log('hello')
     dispatch({type: LOGIN_START})
     axios.post('***LINK***', creds)
     .then(res => {

@@ -1,6 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { addEvent } from '../../Actions';
+import { Button, Form, EventForm, Input, Area, Title, Close, CloseBtn} from './styledMain'
 
 class newEvent extends React.Component {
     state = {
@@ -23,9 +24,13 @@ class newEvent extends React.Component {
         });
     };
 
+    close = () => {
+        this.props.history.push('/protected')
+    }
+
     addEvent = e => {
         e.preventDefault();
-        this.props.addEvent(this.state.new).then(() =>{
+        this.props.addEvent(this.state.new).then(() => {
             this.props.history.push('/protected')
         });
         this.setState({
@@ -42,41 +47,49 @@ class newEvent extends React.Component {
 
     render() {
         return (
-            <div className='new-event'>
-                <h1>Add New Event</h1>
-                <form className='form' onSubmit = {this.addEvent}>
-                    <input
+            <EventForm>
+                <Close>
+                    <CloseBtn onClick={this.close}>X</CloseBtn>
+                </Close>
+                <Title>
+                    <h4>New Event</h4>
+                </Title>
+                <Form className='form' onSubmit={this.addEvent}>
+                    <Input
                         type='text'
                         name='event'
-                        placeholder='event'
+                        placeholder='Event'
                     />
-                    <input
+                    <Input
                         type='text'
                         name='date'
-                        placeholder='date'
+                        placeholder='Date'
                     />
-                    <input
-                        type='text'
-                        name='description'
-                        placeholder='description'
-                    />
-                    <input
+
+                    <Input
                         type='text'
                         name='messageDate'
                         placeholder='Send Date'
                     />
-                    <input
+                    <Area
+                        type='text'
+                        rows='3'
+                        name='Description'
+                        placeholder='Description'
+                    />
+                    <Area
                         type='text'
                         name='message'
-                        placeholder='message'
+                        placeholder='Message'
+                        rows='3'
                     />
-                    <button>Add</button>
-                </form>
-            </div>
+                    <Button>Add</Button>
+                </Form>
+            </EventForm>
         )
     }
 }
 
 
 
-export default connect(null, {addEvent})(newEvent);
+export default connect(null, { addEvent })(newEvent);

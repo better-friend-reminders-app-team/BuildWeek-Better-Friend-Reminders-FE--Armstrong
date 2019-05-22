@@ -1,5 +1,7 @@
 import React from 'react';
-import {Form, Input, Button} from './styledComponents'
+import {Form, Input, Button} from './styledComponents';
+import { register } from '../../Actions/index';
+import {connect} from 'react-redux';
 
 class Register extends React.Component {
     state = {
@@ -19,11 +21,12 @@ class Register extends React.Component {
 
     submit = (e) => {
         e.preventDefault();
+        alert('you submitted')
         localStorage.setItem('username', this.state.un)
         localStorage.setItem('password', this.state.pw)
         localStorage.setItem('firstname', this.state.fn)
-        localStorage.setItem('lastname', this.state.ln)
-        localStorage.setItem('email', this.state.em)
+        localStorage.setItem('phonenumber', this.state.pn)
+        this.props.register(this.state);
         this.setState({
             un: '',
             pw: '',
@@ -39,11 +42,11 @@ class Register extends React.Component {
                 <Input name="pn" onChange={this.handleChanges} value={this.state.fn} placeholder="Phone Number" />
                 <Input name="un" onChange={this.handleChanges} value={this.state.un} placeholder="username" />
                 <Input name="pw" onChange={this.handleChanges} value={this.state.pw} placeholder="password" />
-                <Button>Login</Button>
+                <Button>Register</Button>
             </Form>
         )
     }
 }
 
 
-export default Register;
+export default connect(null, {register})(Register);
