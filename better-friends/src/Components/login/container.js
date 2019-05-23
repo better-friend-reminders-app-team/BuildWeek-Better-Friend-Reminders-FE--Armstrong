@@ -6,7 +6,9 @@ import './loginStyles.css'
 import {NavWrapper, LoginCont} from './styledComponents'
 
 const Container = props => {
+
     return (
+        
         <LoginCont>
             <NavWrapper>
                 <NavLink className='link' to='/cred/login' >Login</NavLink>{' '}
@@ -14,7 +16,7 @@ const Container = props => {
             </NavWrapper>
             <Route path='/cred/login' component={Login} />
             <Route path='/cred/register' component={Register} />
-        </LoginCont>
+        </LoginCont> 
     )
 }
 

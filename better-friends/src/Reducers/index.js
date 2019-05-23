@@ -10,12 +10,19 @@ import {
     LOGIN_FAIL,
     REGISTER_START,
     REGISTER_SUCCESS,// eslint-disable-next-line
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    EDIT_START,
+    EDIT_SUCCESS,
+    LOGOUT_START,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAIL
+
 } from '../Actions';
 
 const initialState = {
     addingEvent: false,
     addingData: false,
+    editingEvent: false,
     events: [
         {
             event: 'Toms Birthday',
@@ -23,15 +30,35 @@ const initialState = {
             description: 'Birthday party',
             messageDate: '01/19/19',
             message: 'Happy Birthday',
-            id: 1
+            id: 1,
+            type: 'birthday'
         },
         {
-            event: 'testevent2',
+            event: 'Test Wedding',
             date: 'testdate2',
             description: 'testdesc2',
             messageDate: 'testmsgdate2',
             message: 'testmsg2',
-            id: 2
+            id: 2,
+            type: 'wedding',
+        },
+        {
+            event: 'Test Holiday',
+            date: 'testdate2',
+            description: 'testdesc2',
+            messageDate: 'testmsgdate2',
+            message: 'testmsg2',
+            id: 3,
+            type: 'holiday',
+        },
+        {
+            event: 'Test Anniversary',
+            date: 'testdate2',
+            description: 'testdesc2',
+            messageDate: 'testmsgdate2',
+            message: 'testmsg2',
+            id: 4,
+            type: 'anniversary',
         }
     ],
     error: '',
@@ -70,6 +97,18 @@ const reducer = (state = initialState, action) => {
                 addingData: false
                 //update state data here
             });
+        case EDIT_START:
+            return {
+                ...state,
+                editingEvent: true
+            };
+        case EDIT_SUCCESS:
+            return{
+                ...state,
+                editingEvent: false,
+                error:'',
+                events: action.payload
+            };        
 
         case LOGIN_START:
             return ({
@@ -88,8 +127,13 @@ const reducer = (state = initialState, action) => {
         case REGISTER_SUCCESS:
             return ({
                 ...state,
-                isLoggedIn: true
+                isLoggedIn: false
             });
+            case LOGOUT_SUCCESS:
+            return({
+                ...state,
+                isloggedIn: false
+            })
 
         default:
             return state;

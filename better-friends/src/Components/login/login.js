@@ -23,6 +23,9 @@ class Login extends React.Component {
            localStorage.setItem("token", this.props.token)
             alert('you are signed in')
             this.props.login()
+            this.props.history.push('/protected')
+        }else{
+            alert('INCORRECT CREDENTIALS!')
         }
 
         this.setState({

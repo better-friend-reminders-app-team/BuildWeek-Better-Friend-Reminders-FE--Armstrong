@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addEvent } from '../../Actions';
-import { Button, Form, EventForm, Input, Area, Title, Close, CloseBtn} from './styledMain'
+import { Button, Form, EventForm, Input, Area, Title, Close, CloseBtn, NewSelect} from './styledMain'
 
 class newEvent extends React.Component {
     state = {
@@ -10,7 +10,8 @@ class newEvent extends React.Component {
             date: '',
             description: '',
             messageDate: '',
-            message: ''
+            message: '',
+            type: ''
         }
     };
 
@@ -55,6 +56,14 @@ class newEvent extends React.Component {
                     <h4>New Event</h4>
                 </Title>
                 <Form className='form' onSubmit={this.addEvent}>
+                    <NewSelect name = 'type'>
+                        <option value ='all'>All</option>
+                        <option value = 'birthday'>Birthday</option>
+                        <option value = 'wedding'>Wedding</option>
+                        <option value ='anniversary'>Anniversary</option>
+                        <option value = 'holiday'>Holiday</option>
+                        <option value = 'party'>Party</option>
+                    </NewSelect>
                     <Input
                         type='text'
                         name='event'

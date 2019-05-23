@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import newEvent from './newEvent';
 import { connect } from 'react-redux';
-import { Card, CardContainer, Head, Select, SelectContainer } from './styledMain'
+import { Card, CardContainer, Head, Select, SelectContainer, Error} from './styledMain'
 import './mainStyles.css';
 import '../../App.css';
 
@@ -14,7 +14,8 @@ import EditForm from './EditForm';
 class Main extends React.Component {
     state = {
         deletingEvent: null,
-        editingEventId: null
+        editingEventId: null,
+        selectType: 'all'
     };
 
     // componentDidMount() {
@@ -37,7 +38,23 @@ class Main extends React.Component {
         this.setState({ editingEventId:''})
     }
 
+    FilteredEvents = (events) =>{
+        if( this.state.selectType ==='all'){
+            return events
+        }
+         return events.filter(event =>{
+            return (event.type === this.state.selectType)
+        })
+    }
 
+    onChange = e =>{
+        let value = e.target.value;
+        let name = e.target.name;
+        this.setState({
+            [name]:value
+        })
+
+    }
 
 
 
@@ -53,17 +70,20 @@ class Main extends React.Component {
                 </Head>
                 <Route path='/protected/new-event' component={newEvent} />
                 <SelectContainer>
-                    <Select>
-                        <option>All</option>
-                        <option>Birthday</option>
-                        <option>Wedding</option>
-                        <option>Aniversary</option>
-                        <option>Holiday</option>
-                        <option>Party</option>
+                    <Select name= 'selectType' onChange = {this.onChange} value = {this.state.selectType}>
+                        <option value ='all'>All</option>
+                        <option value = 'birthday'>Birthday</option>
+                        <option value = 'wedding'>Wedding</option>
+                        <option value ='anniversary'>Anniversary</option>
+                        <option value = 'holiday'>Holiday</option>
+                        <option value = 'party'>Party</option>
                     </Select>
                 </SelectContainer>
                 <CardContainer>
-                    {this.props.events.map(event => {
+                {this.FilteredEvents(this.props.events).length === 0 && 
+                    <Error>There are no upcoming {`${this.state.selectType}`.charAt(0).toUpperCase()+ `${this.state.selectType}`.slice(1)}s</Error>
+                }
+                    {this.FilteredEvents(this.props.events).map(event => {
                         if (this.state.editingEventId === event.id) {
                             return (
                                 <Card>

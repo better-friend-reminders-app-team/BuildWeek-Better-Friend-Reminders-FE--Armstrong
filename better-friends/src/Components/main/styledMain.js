@@ -42,8 +42,22 @@ export const CardContainer = styled.div`
     border-radius:10px;
 `;
 
+export const Error = styled.h2`
+    margin: 20px auto;
+`;
+
 export const SelectContainer = styled.div`
     margin: 0 auto;
+`;
+
+export const NewSelect = styled.select`
+    border-radius:4px;  
+    border:1px solid grey;
+    margin-left:10px;
+    padding: 5px 0;
+    width: 10%;
+    margin: 0 auto;
+
 `;
 
 export const Select = styled.select`
@@ -81,6 +95,7 @@ export const EditInput = styled.input`
     border: 1px solid grey;
     background: #4f4c6c;
     border-radius: 3px
+    color: white;
 `;
 
 export const EditArea = styled.textarea`
@@ -94,12 +109,12 @@ export const EditArea = styled.textarea`
 export const EditBtn = styled.button`
     background: white;
     border:1px solid grey;
-    width: 10%;
+    width: 15%;
     padding: 5px 0;
     margin-bottom: 15px;
     border-radius: 3px;
     cursor:pointer;
-    color: white;
+    
 
 `;
 
