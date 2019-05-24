@@ -27,7 +27,9 @@ class Register extends React.Component {
         localStorage.setItem('password', this.state.pw)
         localStorage.setItem('firstname', this.state.fn)
         localStorage.setItem('phonenumber', this.state.pn)
+        localStorage.setItem('token', this.props.token)
         this.props.register();
+        this.props.history.push('/protected')
         this.setState({
             un: '',
             pw: '',
