@@ -132,8 +132,7 @@ const reducer = (state = initialState, action) => {
         case LOGOUT_SUCCESS:
             return ({
                 ...state,
-                isloggedIn: false,
-                loggingIn: false
+                isLoggedIn: false
             });
 
         default:
