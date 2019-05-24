@@ -19,9 +19,8 @@ class Login extends React.Component {
 
     submit = (e) => {
         e.preventDefault();
-        if (localStorage.getItem('username') === this.state.un && localStorage.getItem('password') === this.state.pw) {
+        if (localStorage.getItem('username') !== '' && localStorage.getItem('password') !== '' && localStorage.getItem('username') === this.state.un && localStorage.getItem('password') === this.state.pw) {
            localStorage.setItem("token", this.props.token)
-            alert('you are signed in')
             this.props.login()
             this.props.history.push('/protected')
         }else{

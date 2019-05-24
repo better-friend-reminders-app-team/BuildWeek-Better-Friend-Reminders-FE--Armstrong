@@ -33,7 +33,7 @@ class EditForm extends React.Component {
             <EditCard>
                 <div>
                     <EditCloseBtn>
-                        <CloseBtn onClick ={this.closeEdit}>X</CloseBtn >
+                        <CloseBtn onClick ={this.editEvent}>X</CloseBtn >
                     </EditCloseBtn>
                     <EditHead>
                         <EditTitle>Edit</EditTitle>

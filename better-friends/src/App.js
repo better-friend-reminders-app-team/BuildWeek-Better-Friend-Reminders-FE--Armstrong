@@ -20,11 +20,13 @@ if(localStorage.getItem("token")){
   return (
     <div className='display'>
       <nav className="main-nav">
+      {props.isLoggedIn && <Link onClick={() => props.logout()} className="main-nav-link" to='/cred/login'> Logout</Link>}
         {!props.isLoggedIn && <Link className="main-nav-link" to='/cred/login'> Login</Link>}
         <Link className="main-nav-link" to='/protected'> Events</Link>
+        {props.isLoggedIn && <Link className="main-nav-link" >{localStorage.getItem('firstname')}</Link>}
       </nav>
       <Route path='/cred' render={props => <Container {...props} loggedin={props.isLoggedIn} /> }/>
-      <Route path='/protected' component={Main} />
+      <PrivateRoute path='/protected' component={Main} />
       {/* switch to Route to view page*/}
     </div>
   );

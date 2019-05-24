@@ -6,7 +6,7 @@ import { Card, CardContainer, Head, Select, SelectContainer, Error} from './styl
 import './mainStyles.css';
 import '../../App.css';
 
-import { deleteEvent, editEvent } from '../../Actions';
+import { deleteEvent, editEvent, getData } from '../../Actions';
 
 import EditForm from './EditForm';
 
@@ -143,5 +143,5 @@ const mapStateToProps = ({
 
 export default connect(
     mapStateToProps,
-    { deleteEvent, editEvent}
+    { deleteEvent, editEvent, getData}
 )(Main);

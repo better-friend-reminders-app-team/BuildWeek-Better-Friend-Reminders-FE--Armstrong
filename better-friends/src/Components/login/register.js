@@ -2,13 +2,15 @@ import React from 'react';
 import {Form, Input, Button} from './styledComponents';
 import { register } from '../../Actions/index';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom'
 
 class Register extends React.Component {
     state = {
         un: '',
         pw: '',
         fn: '',
-        pn: ''
+        pn: '',
+        reg: false
     }
 
 
@@ -26,16 +28,17 @@ class Register extends React.Component {
         localStorage.setItem('firstname', this.state.fn)
         localStorage.setItem('phonenumber', this.state.pn)
         this.props.register();
-        alert('you have registered')
         this.setState({
             un: '',
             pw: '',
             fn: '',
-            pn: ''
+            pn: '',
+            reg: true
         })
     }
 
     render() {
+        if(!this.state.reg){
         return (
             <Form onSubmit={this.submit}>
                 <Input name="fn" onChange={this.handleChanges} value={this.state.fn} placeholder="First Name" />
@@ -44,6 +47,10 @@ class Register extends React.Component {
                 <Input name="pw" onChange={this.handleChanges} value={this.state.pw} placeholder="password" />
                 <Button>Register</Button>
             </Form>
+        )
+        }
+        return(
+            <Redirect to="/cred/login" />
         )
     }
 }

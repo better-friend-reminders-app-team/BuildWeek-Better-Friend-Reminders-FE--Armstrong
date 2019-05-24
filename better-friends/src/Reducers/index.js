@@ -82,7 +82,7 @@ const reducer = (state = initialState, action) => {
                 error: '',
                 events: [
                     ...state.events,
-                    action.payload, 
+                    action.payload,
                 ]
             });
 
@@ -103,12 +103,12 @@ const reducer = (state = initialState, action) => {
                 editingEvent: true
             };
         case EDIT_SUCCESS:
-            return{
+            return {
                 ...state,
                 editingEvent: false,
-                error:'',
+                error: '',
                 events: action.payload
-            };        
+            };
 
         case LOGIN_START:
             return ({
@@ -129,11 +129,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false
             });
-            case LOGOUT_SUCCESS:
-            return({
+        case LOGOUT_SUCCESS:
+            return ({
                 ...state,
-                isloggedIn: false
-            })
+                isloggedIn: false,
+                loggingIn: false
+            });
 
         default:
             return state;
